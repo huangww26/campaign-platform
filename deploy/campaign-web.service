@@ -1,0 +1,18 @@
+[Unit]
+Description=Campaign Platform Web
+After=network.target
+Wants=campaign-api.service
+
+[Service]
+Type=simple
+User=app
+WorkingDirectory=/app/web
+ExecStart=/usr/bin/node /app/web/.next/standalone/server.js
+Restart=always
+RestartSec=5
+Environment=PORT=3000
+Environment=API_BASE_URL=http://localhost:8080
+Environment=NODE_ENV=production
+
+[Install]
+WantedBy=multi-user.target

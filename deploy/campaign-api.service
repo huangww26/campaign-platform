@@ -1,0 +1,18 @@
+[Unit]
+Description=Campaign Platform API
+After=network.target postgresql.service
+Wants=postgresql.service
+
+[Service]
+Type=simple
+User=app
+WorkingDirectory=/app/backend
+ExecStart=/app/backend/server
+Restart=always
+RestartSec=5
+Environment=DB_DSN=host=localhost user=app password=app dbname=campaign_platform port=5432 sslmode=disable
+Environment=PORT=8080
+Environment=APP_ENV=production
+
+[Install]
+WantedBy=multi-user.target
